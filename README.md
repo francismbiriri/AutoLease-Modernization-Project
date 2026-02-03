@@ -1,0 +1,2 @@
+# AutoLease-Modernization-Project
+A comprehensive Business Analysis project focused on transitioning a regional car leasing firm from manual, Excel-based workflows to an automated Management Information System (MIS). This repository documents the end-to-end SDLC lifecycle, including Gap Analysis, Stakeholder Management, Requirement Elicitation (BRD/FRD), and Data Modeling to eliminate revenue leakage and improve operational efficiency.
