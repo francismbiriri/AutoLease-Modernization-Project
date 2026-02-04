@@ -1,5 +1,4 @@
 Epic 1: Lease Lifecycle Modernization
-Instead of system-centric tasks, focus on the user's objective.
 
 Story 1: Digital Lease Application
 
@@ -48,6 +47,7 @@ Story 3: Dispute Resolution Workflow
 
 
 User Story: As a Finance Agent, I want to review customer disputes within a centralized dashboard, so that I can validate claims and prevent unnecessary repossessions.
+
 
 
 Senior AC: 'Invalid' dispute status must automatically trigger the 'Collections' workflow and update the Customer_Status to 'At Risk'.
