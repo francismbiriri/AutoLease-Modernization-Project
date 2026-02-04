@@ -1,0 +1,53 @@
+Epic 1: Lease Lifecycle Modernization
+Instead of system-centric tasks, focus on the user's objective.
+
+Story 1: Digital Lease Application
+
+
+User Story: As a Prospective Customer, I want to submit a lease request via the web portal, so that I can initiate the leasing process without visiting a physical office.
+
+
+Senior AC: System must validate that all mandatory fields (VIN, Customer ID, Term) are populated before submission.
+
+Story 2: Automated Inventory Check (Functional Requirement)
+
+
+Requirement: The system must perform a real-time database query upon request submission to verify vehicle availability.
+
+
+Senior AC: If Vehicle_Status is 'Available', trigger the DocuSign API; if 'Leased' or 'Maintenance', trigger the "Alternative Vehicle" dialog.
+
+Story 3: E-Contract Execution
+
+
+User Story: As a Customer, I want to receive and sign my contract digitally, so that I can secure my vehicle instantly.
+
+
+Senior AC: Contracts must include a 24-hour expiration timer; if unsigned, the vehicle status must revert from 'Reserved' to 'Available'.
+
+Epic 2: Automated Revenue Recovery
+Your focus here is on reducing Revenue Leakage.
+
+Story 1: Midnight Arrears Identification (Technical Story)
+
+
+Requirement: Implement a daily batch job (00:00 CST) to identify leases with Payment_Status = Unpaid where Due_Date is > 5 days in the past.
+
+
+Senior AC: The query must exclude accounts currently flagged as 'In Dispute' to prevent wrongful collections.
+
+Story 2: Late Payment Settlement
+
+
+User Story: As a Customer, I want to pay my overdue balance via a secure gateway or initiate a dispute, so that I can maintain my 'Active' lease status.
+
+
+Senior AC: Successful payment must trigger an immediate status update in the Payments table and send a PDF receipt.
+
+Story 3: Dispute Resolution Workflow
+
+
+User Story: As a Finance Agent, I want to review customer disputes within a centralized dashboard, so that I can validate claims and prevent unnecessary repossessions.
+
+
+Senior AC: 'Invalid' dispute status must automatically trigger the 'Collections' workflow and update the Customer_Status to 'At Risk'.
