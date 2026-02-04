@@ -25,7 +25,6 @@ User Story: As a Customer, I want to receive and sign my contract digitally, so 
 Senior AC: Contracts must include a 24-hour expiration timer; if unsigned, the vehicle status must revert from 'Reserved' to 'Available'.
 
 Epic 2: Automated Revenue Recovery
-Your focus here is on reducing Revenue Leakage.
 
 Story 1: Midnight Arrears Identification (Technical Story)
 
@@ -51,3 +50,4 @@ User Story: As a Finance Agent, I want to review customer disputes within a cent
 
 
 Senior AC: 'Invalid' dispute status must automatically trigger the 'Collections' workflow and update the Customer_Status to 'At Risk'.
+
