@@ -1,0 +1,256 @@
+# User Acceptance Testing (UAT)
+
+## Project
+
+**Auto-Lease Pro: Legacy System Modernization**
+
+## Purpose
+
+This UAT document validates that the Auto-Lease Pro system meets defined **business, data, and analytical requirements** from a hybrid analyst perspective. Testing confirms that end-to-end workflows operate correctly, data logic is accurate, and analytical outputs are reliable for decision-making.
+
+---
+
+## 1. UAT Scope
+
+### In Scope
+
+* Lease creation and lifecycle management
+* Vehicle inventory availability and booking prevention
+* Payment tracking and overdue identification
+* Late-fee and revenue-at-risk analysis
+* Dispute submission and tracking
+* BI dashboards and analytical accuracy
+
+### Out of Scope
+
+* Third-party payment gateway processing
+* Performance/load testing
+* Mobile application testing
+
+---
+
+## 2. UAT Entry & Exit Criteria
+
+### Entry Criteria
+
+* BRD approved
+* Database schema deployed
+* Core SQL queries validated in development
+* Test data available for Customers, Vehicles, Leases, and Payments
+
+### Exit Criteria
+
+* All critical and high-priority test cases passed
+* No open data integrity or calculation defects
+* Business stakeholders sign off on results
+
+---
+
+## 3. Test Environment
+
+| Component | Description                                          |
+| --------- | ---------------------------------------------------- |
+| Database  | SQL Server (UAT instance)                            |
+| BI Tool   | Power BI / Tableau                                   |
+| Test Data | Seeded customer, vehicle, lease, and payment records |
+
+---
+
+## 4. Roles & Responsibilities
+
+| Role           | Responsibility                   |
+| -------------- | -------------------------------- |
+| Business Owner | Validates business outcomes      |
+| Hybrid Analyst | Validates data logic and metrics |
+| QA / Tester    | Executes test cases              |
+| IT Support     | Resolves defects                 |
+
+---
+
+## 5. Test Scenarios Overview
+
+| Scenario ID | Scenario Name                       | Priority |
+| ----------- | ----------------------------------- | -------- |
+| UAT-01      | Lease Creation & Availability Check | High     |
+| UAT-02      | Prevent Double Booking              | High     |
+| UAT-03      | Payment Posting                     | High     |
+| UAT-04      | Overdue Lease Identification        | Critical |
+| UAT-05      | Revenue-at-Risk Calculation         | Critical |
+| UAT-06      | Dispute Submission                  | Medium   |
+| UAT-07      | Inventory Utilization Reporting     | Medium   |
+| UAT-08      | Edge Case – Boundary Dates          | High     |
+
+---
+
+## 6. Detailed UAT Test Cases
+
+### UAT-01: Lease Creation & Availability Check
+
+**Objective:** Validate that a lease can only be created for an available vehicle.
+
+**Preconditions:**
+
+* Vehicle status = Available
+
+**Steps:**
+
+1. Select available vehicle
+2. Create lease with valid start and end dates
+
+**Expected Result:**
+
+* Lease is created successfully
+* Vehicle status updates to Unavailable
+
+---
+
+### UAT-02: Prevent Double Booking
+
+**Objective:** Ensure vehicles cannot be leased concurrently.
+
+**Preconditions:**
+
+* Active lease exists for selected VIN
+
+**Steps:**
+
+1. Attempt to create a second lease for same VIN
+
+**Expected Result:**
+
+* System blocks lease creation
+* User receives validation message
+
+---
+
+### UAT-03: Payment Posting
+
+**Objective:** Validate payment recording and association to a lease.
+
+**Preconditions:**
+
+* Active lease exists
+
+**Steps:**
+
+1. Post payment against lease
+2. Verify payment record
+
+**Expected Result:**
+
+* Payment recorded with correct amount and date
+* Linked to correct Lease ID
+
+---
+
+### UAT-04: Overdue Lease Identification
+
+**Objective:** Validate overdue logic using date-based calculations.
+
+**Preconditions:**
+
+* Lease end date > 5 days before current date
+
+**Steps:**
+
+1. Run overdue identification logic
+2. Review lease status
+
+**Expected Result:**
+
+* Lease flagged as Overdue
+* No reliance on manual status flags
+
+---
+
+### UAT-05: Revenue-at-Risk Calculation
+
+**Objective:** Validate accuracy of late-fee and delinquency metrics.
+
+**Preconditions:**
+
+* Overdue leases exist
+
+**Steps:**
+
+1. Execute revenue-at-risk SQL query
+2. Compare output to BI dashboard
+
+**Expected Result:**
+
+* Revenue-at-risk matches calculated late fees
+* Dashboard metrics align with SQL output
+
+---
+
+### UAT-06: Dispute Submission
+
+**Objective:** Validate dispute capture and auditability.
+
+**Preconditions:**
+
+* Payment record exists
+
+**Steps:**
+
+1. Submit dispute notice
+2. Review dispute record
+
+**Expected Result:**
+
+* Dispute linked to lease and payment
+* Status set to Open
+
+---
+
+### UAT-07: Inventory Utilization Reporting
+
+**Objective:** Validate inventory utilization metrics.
+
+**Steps:**
+
+1. View inventory dashboard
+2. Compare totals to vehicle table
+
+**Expected Result:**
+
+* Utilization percentages accurate
+* No unavailable vehicle counted as available
+
+---
+
+### UAT-08: Edge Case – Boundary Dates
+
+**Objective:** Validate behavior around lease end date boundaries.
+
+**Test Conditions:**
+
+* Lease end date = Today
+* Lease end date = Today - 5 days
+* Lease end date = Today + 1 day
+
+**Expected Result:**
+
+* Correct classification as Current or Overdue
+* No false positives
+
+---
+
+## 7. Defect Management
+
+| Severity | Description                                 |
+| -------- | ------------------------------------------- |
+| Critical | Incorrect financial or overdue calculations |
+| High     | Business process failure                    |
+| Medium   | Reporting inconsistencies                   |
+| Low      | UI or cosmetic issues                       |
+
+---
+
+## 8. UAT Sign-Off
+
+| Role           | Name | Signature | Date |
+| -------------- | ---- | --------- | ---- |
+| Business Owner |      |           |      |
+| Hybrid Analyst |      |           |      |
+| IT Lead        |      |           |      |
