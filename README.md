@@ -1,54 +1,90 @@
-# AutoLease-Modernization-Project
-A comprehensive Business Analysis project focused on transitioning a regional car leasing firm from manual, Excel-based workflows to an automated Management Information System (MIS). This repository documents the end-to-end SDLC lifecycle, including Gap Analysis, Stakeholder Management, Requirement Elicitation (BRD/FRD), and Data Modeling to eliminate revenue leakage and improve operational efficiency.
-# Auto-Lease Pro: Modernization Project
+# Auto‑Lease Pro: Legacy System Modernization
 
-## 📌 Business Problem
-The current leasing process relies on manual Excel entries, leading to:
-* **15% Revenue Leakage** due to untracked late fees.
-* **Data Silos:** Lack of real-time visibility into vehicle availability.
-* **Operational Inefficiency:** Average contract turnaround time is 5+ days.
+### Hybrid Business & Data Analyst Case Study
 
-## 🚀 The Solution
-Designed a centralized Lease Management System (LMS) that automates the lease lifecycle, integrates e-signatures, and utilizes a SQL-backed database for real-time reporting.
+## 📌 Overview
 
-## 🛠️ Tools Used
-* **Analysis:** SWOT, Gap Analysis, MoSCoW Prioritization.
-* **Diagramming:** Lucidchart (BPMN 2.0, UML).
-* **Documentation:** Jira (User Stories), Confluence (BRD/FRD).
-* **Data:** SQL (PostgreSQL), Entity-Relationship Diagramming (ERD).
+Auto‑Lease Pro is an end‑to‑end systems modernization case study that demonstrates how a hybrid analyst bridges business problems, data modeling, and analytical insight.
 
-## 📂 Repository Structure
+The project documents the transformation of a manual, Excel‑driven vehicle leasing operation into a structured, data‑centric Management Information System (MIS). The focus is not on building a production application, but on business analysis, system design, data logic, and validation—the core responsibilities of a hybrid business/data analyst.
 
-### 1. Discovery & Analysis
-* **Process Mapping (BPMN 2.0):** Detailed AS-IS maps identifying bottlenecks and TO-BE maps illustrating the automated future state.
-* **UI/UX Wireframes:** Low-fidelity mockups created in **Balsamiq** to validate user interaction for the Leasing Portal and Dispute Dashboard.
-    * **Leasing Portal:** Features real-time availability status for vehicles like the Chevrolet Corvette and Toyota Supra.
-    * **Payment Portal:** Integrated VIN tracking and a formal Dispute Notice to mitigate fraudulent claims.
+## 🎯 Business Problem
 
-### 2. Requirements & Governance
-* **Agile Backlog (Jira):** A prioritized backlog featuring Epics (Leasing Process & Payment Tracking) and detailed User Stories.
-* **Quality Gates:** * **Definition of Ready (DoR):** Ensures requirements include data lineage and testable Acceptance Criteria (AC).
-    * **Definition of Done (DoD):** Ensures features meet database integrity standards and pass UAT.
-* **UAT Scripts:** Functional test cases for validating "Happy Path" and "Edge Case" scenarios.
+Auto‑Lease Co relied on spreadsheets and manual checks to manage:
 
-### 3. Technical Architecture
-* **Entity-Relationship Diagram (ERD):** A Crow’s Foot notation schema mapping the relationships between Customers, Vehicles, Leases, and Payments.
-    * **Core Entities:** Tracks Customer IDs, Payment IDs, VINs, and Lease IDs.
-    * **Data Integrity:** Includes specific data types such as Decimals for amounts and Dates for lease terms.
-* **Database Schema (SQL):** DDL scripts to generate the SQL Server environment based on defined primary and foreign keys.
-* **Business Intelligence:** SQL-driven analysis and Power BI/Tableau dashboards identifying "Revenue at Risk" and inventory utilization.
+* Vehicle availability
+* Lease lifecycles
+* Payment tracking and late‑fee recovery
+
+This resulted in:
+
+* High administrative overhead
+* **Revenue leakage: Identified $10,860.60 in stagnant/overdue revenue.**
+* Inconsistent inventory visibility and limited auditability.
+
+## 🧠 Analyst‑Led Solution
+
+This project delivers a future‑state system design that:
+
+* Centralizes customers, vehicles, leases, and payments.
+* **Automates inventory availability checks via SQL logic.**
+* **Flags overdue leases using date‑based logic (DATEDIFF) rather than manual status flags.**
+* **Enables real-time Revenue-at-Risk tracking via Power BI.**
+
+## 📂 Repository Structure & Artifacts
+
+### 1️⃣ Discovery & Process Analysis (`/Documentation`)
+
+* **AS‑IS and TO‑BE BPMN (2.0) diagrams** identifying operational bottlenecks.
+* **Confluence Project Space:** Comprehensive project documentation including the Executive Summary and Stakeholder Matrix.
+
+### 2️⃣ Requirements & Governance (`/Documentation`)
+
+* **Business Requirements Document (BRD):** Hosted on Confluence, featuring a **Requirement Traceability Matrix (RTM)** linking business needs to SQL/BI objects.
+* **Governance:** Defined "Definition of Ready" (DoR) and "Definition of Done" (DoD).
+
+### 3️⃣ Data & Systems Design (`/Technical`)
+
+* **Entity‑Relationship Diagram (ERD):** Crow’s Foot notation defining relationships between Customers, Vehicles, Leases, and Payments.
+* **Relational Schema:** T-SQL scripts for table creation and data integrity (Primary/Foreign Keys).
+
+### 4️⃣ SQL & Analytical Logic (`/Technical/SQL-Scripts`)
+
+* **Business Rules:** SQL-based logic for identifying "Overdue" status.
+* **Data Exports:** Cleaned CSV datasets (Customers, Vehicles, Leases, Payments) used for BI tool ingestion.
+
+### 5️⃣ Business Intelligence (`/Technical/Dashboards`)
+
+* **Power BI Dashboard (`.pbix`):** A fully functional interactive report featuring:
+* **Executive KPI Cards:** Total Revenue at Risk ($10.8K).
+* **Fleet Utilization:** Real-time availability tracking by Make/Model.
+* **Lease Aging:** Drill-down capabilities for "Overdue" and "Disputed" accounts.
+
+
+
+### 6️⃣ User Acceptance Testing (UAT)
+
+* **UAT Test Scripts:** Validation of SQL results against Power BI visual outputs to ensure a "Single Source of Truth."
+
+## 🛠️ Tools & Technologies
+
+* **Business Analysis:** BPMN 2.0, Jira, **Confluence**, Balsamiq
+* **Data Modeling:** ERD (draw.io), Relational Schema Design
+* **Database:** SQL Server (T‑SQL)
+* **Analytics & Visualization:** **Power BI (DAX, Power Query)**
+* **Testing:** Requirement Traceability Matrix (RTM)
+
+## 📈 Business Impact (Verified)
+
+* **Operational Efficiency:** ~60% reduction in manual administrative work through automated status flagging.
+* **Revenue Recovery:** **Identified $10,860.60 in recoverable revenue** (Unpaid/Disputed payments).
+* **Data Integrity:** Eliminated "Excel Silos" by implementing a centralized SQL Master Database.
+
+## 🔍 What This Project Demonstrates
+
+* Translation of business problems into data‑driven solutions.
+* **Metric Validation:** Proving the accuracy of BI dashboards by tracing them back to raw SQL queries.
+* Analyst mindset focused on correctness, traceability, and decision impact.
 
 ---
 
-## 🛠️ Tech Stack & Tools
-* **Analysis:** BPMN 2.0, Jira, Balsamiq.
-* **Database:** SQL Server (T-SQL), ERD Design (draw.io).
-* **Visualization:** Power BI / Tableau.
-* **Domain Expertise:** Sales Lifecycle, Risk Management, Revenue Recovery.
-
----
-
-## 📈 Business Impact (Projected)
-* **Operational Efficiency:** Automated the "Midnight Arrears Query," eliminating manual daily audit work.
-* **Revenue Growth:** Identified specific late-fee targets (e.g., $417.95 per delinquent account) to be recovered through automated payment flows.
-* **Inventory Accuracy:** Real-time status updates prevent double-booking of unavailable vehicles.
