@@ -1,0 +1,256 @@
+# Business Requirements Document (BRD)
+
+## Project Title
+
+**Auto-Lease Pro: Legacy System Modernization**
+
+## Prepared For
+
+Auto-Lease Co – Operations, Finance, and IT Stakeholders
+
+## Prepared By
+
+Information Systems Portfolio | Business Analysis & Data Automation
+
+## 1. Executive Summary
+
+Auto-Lease Pro is a business-led digital transformation initiative aimed at modernizing Auto-Lease Co’s legacy, Excel-dependent leasing and payment processes. The current manual workflows create operational bottlenecks, increase revenue leakage from late payments, and reduce inventory visibility.
+
+The proposed solution introduces an automated Management Information System (MIS) that integrates leasing, inventory management, and payment recovery. The system is designed to reduce manual administrative effort by 60%, improve late-fee recovery to 80%, and establish a scalable foundation for future growth.
+
+---
+
+## 2. Business Objectives
+
+### Analyst Positioning
+
+This initiative is designed and delivered from a **hybrid analyst perspective**, bridging business analysis, data modeling, SQL-based analysis, and business intelligence. Requirements are intentionally traceable from business intent through data structures to analytical outputs, reflecting real-world hybrid analyst responsibilities.
+
+### 2.1 Primary Objectives
+
+* Automate lease creation, tracking, and closure processes
+* Improve visibility into vehicle availability and lease status
+* Increase recovery of late fees and overdue payments
+* Reduce dependency on spreadsheets and manual reconciliation
+
+### 2.2 Success Metrics
+
+* 60% reduction in manual administrative touchpoints
+* 80% recovery rate of late-fee revenue
+* Near real-time accuracy of inventory availability
+* Reduction in payment disputes caused by data inconsistencies
+
+---
+
+## 3. Current State (AS-IS)
+
+### 3.1 Process Overview
+
+* Leasing and payment data are tracked primarily in Excel
+* Inventory availability is manually checked and updated
+* Late payments are identified through ad-hoc daily reviews
+* Disputes are handled informally with limited audit trails
+
+### 3.2 Key Pain Points
+
+* High risk of data entry errors and inconsistent records
+* Delayed identification of overdue leases and payments
+* Revenue leakage from missed or late fee collection
+* No centralized source of truth for customers, vehicles, or leases
+
+---
+
+## 4. Future State (TO-BE)
+
+### 4.1 Target Capabilities
+
+* Centralized leasing and payment database
+* Automated inventory availability checks at lease initiation
+* System-driven identification of overdue leases and payments
+* Integrated payment dispute workflow with audit logging
+
+### 4.2 High-Level Workflow
+
+1. Vehicle availability validated in real time
+2. Lease created and linked to customer and vehicle records
+3. Payments tracked against lease terms
+4. Overdue leases automatically flagged
+5. Late fees and recovery actions initiated
+
+---
+
+## 5. Stakeholders
+
+| Stakeholder Group | Responsibility                                    |
+| ----------------- | ------------------------------------------------- |
+| Operations Team   | Lease management and inventory control            |
+| Finance Team      | Payment tracking, late fees, and revenue recovery |
+| Management        | Reporting, KPIs, and strategic oversight          |
+| IT / Data Team    | System maintenance, data integrity, and reporting |
+
+---
+
+## 6. Scope Definition
+
+### 6.1 In Scope
+
+* Lease management and tracking
+* Vehicle inventory availability
+* Payment tracking and late-fee identification
+* Dispute notice capture and review
+* Business intelligence and reporting dashboards
+
+### 6.2 Out of Scope
+
+* Third-party payment gateway processing
+* Customer credit scoring
+* Mobile application development
+
+---
+
+## 7. Functional Requirements
+
+> **Hybrid Analyst Note:** All functional requirements are explicitly mapped to underlying data entities and analytical outputs to ensure traceability between business rules, SQL logic, and BI reporting.
+
+### 7.1 Leasing Management
+
+* The system shall allow creation, modification, and termination of leases
+* Each lease shall be linked to a unique Customer ID and VIN
+* Lease start and end dates shall be mandatory
+
+### 7.2 Inventory Management
+
+* The system shall display real-time vehicle availability
+* Vehicles assigned to active leases shall be marked unavailable
+* Double-booking of vehicles shall be prevented
+
+### 7.3 Payment Tracking
+
+* The system shall track payments against each lease
+* Late payments shall be automatically identified
+* Late fees shall be calculated based on predefined rules
+
+### 7.4 Dispute Management
+
+* Customers shall be able to submit formal dispute notices
+* Disputes shall be linked to specific payments and leases
+* Dispute status and resolution history shall be auditable
+
+### 7.5 Reporting & Analytics
+
+* The system shall identify revenue at risk from overdue leases using SQL-driven date-difference logic
+* Dashboards shall display inventory utilization, lease aging, and delinquency trends
+* Metrics shall be validated directly against source tables (Leases, Payments, Vehicles)
+* Analytical outputs shall support both operational monitoring and executive decision-making
+* The system shall identify revenue at risk from overdue leases
+* Dashboards shall display inventory utilization
+* Reports shall support operational and management decision-making
+
+---
+
+## 8. Non-Functional Requirements
+
+### 8.1 Performance
+
+* Inventory and lease status updates shall be near real time
+* Standard queries shall return results within acceptable response times
+
+### 8.2 Data Integrity & Security
+
+* Enforced primary and foreign key relationships
+* Validation of data types for monetary and date fields
+* Controlled access based on user roles
+
+### 8.3 Scalability
+
+* The database design shall support future growth in customers, vehicles, and leases
+
+---
+
+## 9. Data Requirements
+
+> **Hybrid Analyst Ownership:** Data requirements are defined to support operational workflows *and* downstream analytics, ensuring a single source of truth across the system.
+
+### 9.1 Core Entities
+
+* Customers
+* Vehicles
+* Leases
+* Payments
+
+### 9.2 Key Data Attributes
+
+* Unique identifiers (Customer ID, Lease ID, Payment ID)
+* VIN for vehicle tracking
+* Date fields for lease terms
+* Decimal fields for payment and fee amounts
+
+---
+
+## 10. Assumptions & Constraints
+
+### Analyst Assumptions
+
+* Business rules will be enforced primarily through data logic rather than manual status flags
+* Date-based calculations will be preferred to ensure analytical flexibility and accuracy
+
+### Constraints
+
+### 10.1 Assumptions
+
+* Users will transition from Excel-based workflows
+* Data migration from legacy spreadsheets will be feasible
+
+### 10.2 Constraints
+
+* Solution must align with SQL Server standards
+* Budget and timeline constraints limit initial feature scope
+
+---
+
+## 11. Acceptance Criteria
+
+> Acceptance criteria validate not only functional correctness, but also **data accuracy and analytical reliability**.
+
+* All core leasing and payment workflows function end to end
+* Automated identification of overdue leases is accurate
+* Reports correctly identify revenue at risk
+* UAT scripts pass for both happy path and edge case scenarios
+
+---
+
+## 12. Risks & Mitigations
+
+| Risk                              | Mitigation                                             |
+| --------------------------------- | ------------------------------------------------------ |
+| User resistance to change         | Training and clear documentation                       |
+| Data migration errors             | Validation and reconciliation checks                   |
+| Metric misalignment               | Cross-validation between SQL queries and BI dashboards |
+| Revenue leakage during transition | Parallel run during go-live                            |
+
+---
+
+## 12.1 Requirements Traceability Matrix
+
+| Business Objective     | Requirement                  | Data Entity / Field | Analytical Output            |
+| ---------------------- | ---------------------------- | ------------------- | ---------------------------- |
+| Reduce revenue leakage | Auto-flag overdue leases     | Leases.End_Date     | Revenue-at-Risk Dashboard    |
+| Prevent double booking | Real-time availability check | Vehicles.Status     | Leasing Portal UI            |
+| Improve collections    | Late fee identification      | Payments.Amount     | Arrears & Aging Report       |
+| Improve transparency   | Dispute tracking             | Disputes.Status     | Dispute Resolution Dashboard |
+
+| Risk                              | Mitigation                           |
+| --------------------------------- | ------------------------------------ |
+| User resistance to change         | Training and clear documentation     |
+| Data migration errors             | Validation and reconciliation checks |
+| Revenue leakage during transition | Parallel run during go-live          |
+
+---
+
+## 13. Approval
+
+| Role            | Name | Signature | Date |
+| --------------- | ---- | --------- | ---- |
+| Business Owner  |      |           |      |
+| IT Lead         |      |           |      |
+| Project Sponsor |      |           |      |
